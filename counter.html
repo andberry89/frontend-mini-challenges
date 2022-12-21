@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Counter</title>
+  <link rel="stylesheet" href="counter-style.css" />
+</head>
+<body>
+
+    <div class="container">
+        
+        <h1>Counter</h1>
+
+        <div id="currentCount">
+            <span id="count">0</span>
+        </div>
+
+        <div id="controls">
+
+            <div id="sub" class="control btn">-</div>
+            <div id="add" class="control btn">+</div>
+
+        </div>
+
+        <div id="stepControl">
+
+            <label for="stepControl">Increment/Decrement by:</label>
+            <input type="number" id="stepControlVal" value="1" min="1" max="10">
+
+        </div>
+
+        <div id="reset">
+
+            <button id="resetBtn" class="btn">Reset</button>
+
+        </div>
+
+    </div>
+
+    <script src="counter-js.js"></script>
+</body>
+</html>
