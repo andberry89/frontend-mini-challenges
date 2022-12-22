@@ -2,30 +2,6 @@
 
 (function() {
 
-    function findTarget(evt, targetNode, container) {
-
-        // start with innermost element node
-        let currentNode = evt.target;
-
-        // move up through element nodes, until we reach the contatining one
-        while (currentNode && currentNode !== container) {
-            
-            // return a reference to the first node we match
-            if (currentNode.nodeName.toLowerCase() === targetNode.toLowerCase()) {
-                return currentNode;
-            }
-
-            // no match yet; move up to the parent
-            else {
-                currentNode = currentNode.parentNode;
-            }
-        }
-
-        // if we did not return a matching element node, return false
-        return false;
-
-    }
-
     function changeCounter(evt) {
 
         // get the current value for the counter and what the increment/decrement will be
@@ -33,27 +9,24 @@
         const changeVal = Number(document.getElementById('stepControlVal').value);
         let val = Number(count.innerText);
 
-        // Figure out if the button selected was add or subtract
-        const btn = findTarget(evt, 'div', this);
-        if (!btn) {return;}
+        const btn = evt.target;
 
-        if(btn) {
+        // use the id to determine what operation we should apply to the counter
+        // if it's reset, turn the counter to 0
+        // if it's add or subtract, apply the increment/decrement value to the current value
+        if (btn.id === 'resetBtn') {
+            count.innerText = 0;
+        } else {
             btn.id === 'add' ? val += changeVal : val -= changeVal;
             count.innerText = val;
         }
-
     }
-
-    function reset(evt) {
-        // reset the counter to zero
-        count.innerText = 0;
-    }
-
+    // the actual counter value
     const count = document.getElementById('count');
-    const controls = document.getElementById('controls');
-    const resetBtn = document.getElementById('resetBtn');
 
-    controls.addEventListener('click', changeCounter, false);
-    resetBtn.addEventListener('click', reset, false);
+    // returns a node list of the 3 buttons that change the counter's value
+    // then loops through that node list adding a clickable event
+    const btns = document.querySelectorAll('.btn');
+    btns.forEach(btn => btn.addEventListener('click', changeCounter, false));
 
 })();
